@@ -24,3 +24,5 @@ type ResponseBasketProduct struct {
 	BasketProducts []BasketProduct `json:"basketsproducts"`
 	Count          int             `json:"count"`
 }
+
+//finish
