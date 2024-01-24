@@ -3,9 +3,10 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	"github.com/google/uuid"
 	"test/api/models"
 	"test/storage"
+
+	"github.com/google/uuid"
 )
 
 type userRepo struct {

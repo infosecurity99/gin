@@ -41,3 +41,21 @@ func (s Store) Basket() storage.IBasket {
 	return newBasket
 
 }
+
+func (s Store) Category() storage.ICategory {
+	newCategory := NewCategoryRepo(s.DB)
+
+	return newCategory
+}
+
+func (s Store) Product() storage.IProduct {
+	newProduct := NewProductRepo(s.DB)
+
+	return newProduct
+}
+
+func (s Store) BasketProduct() storage.IBasketProduct {
+	newBasketProduct := NewBasketProduct(s.DB)
+
+	return newBasketProduct
+}
