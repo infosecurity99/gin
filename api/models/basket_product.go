@@ -1,23 +1,23 @@
 package models
 
 type BasketProduct struct {
-	ID         string
-	Basket_id  string
-	Product_Id string
-	Quantity   int
+	ID         string `json:"id"`
+	Basket_id  string `json:"basket_id"`
+	Product_Id string `json:"product_id"`
+	Quantity   int    `json:"quantity"`
 }
 
 type CreateBasketProduct struct {
-	Basket_ID  string
-	Product_id string
-	Quantity   int
+	Basket_ID  string `json:"basket_id"`
+	Product_id string `json:"product_id"`
+	Quantity   int    `json:"quantity"`
 }
 
 type UpdateBasketProduct struct {
-	ID         string
-	Basket_Id  string
-	Product_Id string
-	Quantity   int
+	ID         string `json:"id"`
+	Basket_Id  string `json:"basket_id"`
+	Product_Id string `json:"product_id"`
+	Quantity   int    `json:"quantity"`
 }
 
 type ResponseBasketProduct struct {

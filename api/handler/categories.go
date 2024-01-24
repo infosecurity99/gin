@@ -21,7 +21,7 @@ func (h Handler) CreateCategories(c *gin.Context) {
 
 	pKey, err := h.storage.Category().CreateCategory(createCategories)
 	if err != nil {
-		handleResponse(c, "error while creating user", http.StatusInternalServerError, err)
+		handleResponse(c, "error while creating categories", http.StatusInternalServerError, err)
 		return
 	}
 
@@ -42,7 +42,7 @@ func (h Handler) GetCategoriesById(c *gin.Context) {
 
 	uid := c.Param("id")
 
-	user, err := h.storage.Category().GetByIdCategory(models.PrimaryKey{
+	category, err := h.storage.Category().GetByIdCategory(models.PrimaryKey{
 		ID: uid,
 	})
 	if err != nil {
@@ -50,7 +50,7 @@ func (h Handler) GetCategoriesById(c *gin.Context) {
 		return
 	}
 
-	handleResponse(c, "", http.StatusOK, user)
+	handleResponse(c, "", http.StatusOK, category)
 }
 
 // getlistcategory

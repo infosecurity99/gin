@@ -23,9 +23,7 @@ func NewCategoryRepo(db *sql.DB) storage.ICategory {
 func (c categoryRepo) CreateCategory(category models.CreateCategory) (string, error) {
 	uid := uuid.New()
 
-	if _, err := c.db.Exec(`insert into 
-			categories values ($1, $2)
-			`,
+	if _, err := c.db.Exec(`insert into   categories  values ($1, $2)`,
 		uid,
 		category.Name,
 	); err != nil {
@@ -41,7 +39,7 @@ func (c categoryRepo) GetByIdCategory(pKey models.PrimaryKey) (models.Category, 
 	category := models.Category{}
 
 	query := `
-		select id, 
+		select id , name from  categories where id=$1 
 `
 	if err := c.db.QueryRow(query, pKey.ID).Scan(
 		&category.ID,
@@ -65,17 +63,14 @@ func (c categoryRepo) GetListCategory(request models.GetListRequest) (models.Cat
 		offset            = (page - 1) * request.Limit
 	)
 
-	countQuery = `
-		SELECT count(1) from categories  `
+	countQuery = `select  count(1) from categories  `
 
 	if err := c.db.QueryRow(countQuery).Scan(&count); err != nil {
 		fmt.Println("error while scanning count of categories", err.Error())
 		return models.CategoriesResponse{}, err
 	}
 
-	query = `
-		SELECT id, name
-			    `
+	query = `select  id, name  from categories `
 
 	query += ` LIMIT $1 OFFSET $2`
 

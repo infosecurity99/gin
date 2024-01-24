@@ -21,10 +21,11 @@ func NewProductRepo(db *sql.DB) storage.IProduct {
 
 //create
 func (p *productRepo) CreateProduct(createProduct models.CreateProduct) (string, error) {
+
 	uid := uuid.New()
 
 	if _, err := p.db.Exec(`insert into 
-			products values ($1, $2, $3, $4, $5, $6)
+	products values ($1, $2, $3, $4, $5, $6)
 			`,
 		uid,
 		createProduct.Name,
@@ -46,13 +47,14 @@ func (p *productRepo) GetByIdProduct(pKey models.PrimaryKey) (models.Product, er
 	products := models.Product{}
 
 	query := `
-		select id, name, price, orginal_price,quantity, category_id from products where id = $1
+		select id, name, price, original_price ,quantity, category_id from  products where id = $1
 `
 	if err := p.db.QueryRow(query, pKey.ID).Scan(
 		&products.ID,
 		&products.Name,
 		&products.Price,
 		&products.Original_Price,
+		&products.Quantity,
 		&products.Category_Id,
 	); err != nil {
 		fmt.Println("error while scanning user", err.Error())
@@ -84,7 +86,7 @@ func (p *productRepo) GetListProduct(request models.GetListRequest) (models.Prod
 	query = `
 		SELECT id, name , original_price, quantity,category_id
 			FROM products
-			  
+
 			    `
 
 	query += ` LIMIT $1 OFFSET $2`
@@ -122,7 +124,7 @@ func (p *productRepo) GetListProduct(request models.GetListRequest) (models.Prod
 
 func (p *productRepo) UpdateProduct(request models.UpdateProduct) (string, error) {
 	query := `
-	update products 
+	update products
 		set name = $1, price = $2, original_price = $3, quantity=$4, category_id=$5
 			where id = $6`
 

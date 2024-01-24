@@ -25,7 +25,7 @@ func (h Handler) CreateProduct(c *gin.Context) {
 		return
 	}
 
-	user, err := h.storage.Product().GetByIdProduct(models.PrimaryKey{
+	product, err := h.storage.Product().GetByIdProduct(models.PrimaryKey{
 		ID: pKey,
 	})
 	if err != nil {
@@ -33,7 +33,7 @@ func (h Handler) CreateProduct(c *gin.Context) {
 		return
 	}
 
-	handleResponse(c, "", http.StatusCreated, user)
+	handleResponse(c, "", http.StatusCreated, product)
 }
 
 //  getbyidproduct for interface
@@ -46,7 +46,7 @@ func (h Handler) GetByIdProduct(c *gin.Context) {
 		ID: uid,
 	})
 	if err != nil {
-		handleResponse(c, "error while getting user by id", http.StatusInternalServerError, err)
+		handleResponse(c, "error while getting product by id", http.StatusInternalServerError, err)
 		return
 	}
 
